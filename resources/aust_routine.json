@@ -1,0 +1,149 @@
+{
+    "program": "BSc in Computer Science and Engineering",
+    "university": "AUST",
+    "semester": "Fall 2025",
+    "year": 4,
+    "semester_no": 2,
+    "student_details": {
+        "section": "A",
+        "monday_lab_group": "DAgr-2",
+        "tuesday_lab_section": "A2"
+    },
+    "schedule": {
+        "MONDAY": [
+            {
+                "time": "09:40-10:30",
+                "type": "Theory class",
+                "credits": 3.0,
+                "course": "CSE 4227",
+                "room": "7A03",
+                "teacher": "Dr. Kalpoma"
+            },
+            {
+                "time": "10:30-11:20",
+                "type": "Theory class",
+                "credits": 3.0,
+                "course": "CSE 4203",
+                "room": "7C07",
+                "teacher": "RZC"
+            },
+            {
+                "time": "01:00-03:30",
+                "type": "week_alternating_lab",
+                "credits": 0.75,
+                "course": "CSE 4262",
+                "title": "Data Analytics Lab",
+                "group": "DAgr-2",
+                "room": "7B08",
+                "teacher": "Munia",
+                "note": "Only on alternate weeks (Group-2 schedule)"
+            },
+            {
+                "time": "03:30-04:20",
+                "type": "Theory class",
+                "credits": 3.0,
+                "course": "CSE 4261 (DA)",
+                "room": "7C06",
+                "teacher": "Munia"
+            },
+            {
+                "time": "04:20-05:10",
+                "type": "Theory class",
+                "credits": 3.0,
+                "course": "CSE 4261 (DA)",
+                "room": "7C06",
+                "teacher": "Munia"
+            }
+        ],
+        "TUESDAY": [
+            {
+                "time": "08:00-08:50",
+                "type": "Theory class",
+                "credits": 3.0,
+                "course": "CSE 4267",
+                "room": "7A03",
+                "teacher": "TFQ"
+            },
+            {
+                "time": "08:50-09:40",
+                "type": "Theory class",
+                "credits": 3.0,
+                "course": "CSE 4267",
+                "room": "7A03",
+                "teacher": "TFQ"
+            },
+            {
+                "time": "09:40-10:30",
+                "type": "Theory class",
+                "credits": 3.0,
+                "course": "CSE 4227",
+                "room": "7A03",
+                "teacher": "Dr. Kalpoma"
+            },
+            {
+                "time": "10:30-01:00",
+                "type": "week_alternating_lab",
+                "credits": 0.75,
+                "note": "Section A2 - assigned lab (CSE 4204 or CSE 4228)",
+                "possible_courses": [
+                    {
+                        "course": "CSE 4204",
+                        "title": "Computer Graphics Lab",
+                        "section": "A2",
+                        "room": "7B06",
+                        "teacher": "RZC, Era"
+                    },
+                    {
+                        "course": "CSE 4228",
+                        "title": "Digital Image Processing Lab",
+                        "section": "A2",
+                        "room": "7B05",
+                        "teacher": "Joy, Muthaki"
+                    }
+                ]
+            }
+        ],
+        "WEDNESDAY": [
+            {
+                "time": "08:50-09:40",
+                "type": "Theory class",
+                "credits": 3.0,
+                "course": "CSE 4267",
+                "room": "7A05",
+                "teacher": "TFQ"
+            },
+            {
+                "time": "09:40-10:30",
+                "type": "Theory class",
+                "credits": 3.0,
+                "course": "CSE 4227",
+                "room": "7A05",
+                "teacher": "Dr. Kalpoma"
+            },
+            {
+                "time": "10:30-11:20",
+                "type": "Theory class",
+                "credits": 3.0,
+                "course": "CSE 4203",
+                "room": "7A07",
+                "teacher": "RZC"
+            },
+            {
+                "time": "11:20-12:10",
+                "type": "Theory class",
+                "credits": 3.0,
+                "course": "CSE 4261 (DA)",
+                "room": "7A06",
+                "teacher": "Munia"
+            },
+            {
+                "time": "12:10-01:00",
+                "type": "Theory class",
+                "credits": 3.0,
+                "course": "CSE 4203",
+                "room": "7C06",
+                "teacher": "RZC"
+            }
+        ]
+    }
+}
