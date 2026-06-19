@@ -1,0 +1,25 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Database files (personal data)
+*.db
+*.sqlite
+*.sqlite3
+
+# Data files (your personal academic data)
+routine.json
+*.csv
+*.xlsx
+
+# Secrets and config
+.env
+config.py
+
