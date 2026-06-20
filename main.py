@@ -2,11 +2,30 @@ from fastmcp import FastMCP
 import os
 import json
 from datetime import datetime
+import sqlite3
 
 routine_path = os.path.join(os.path.dirname(__file__),"resources","aust_routine.json")
-DB_path = os.path.join(os.path.dirname(__file__),"acadeDB.db")
+DB_path = os.path.join(os.path.dirname(__file__),"acadedb.db")
 
 mcp = FastMCP(name='academcp')
+
+def init_db():
+    with sqlite3.connect(DB_path) as c:
+        c.execute(
+            """
+            create table if not exists quizes(
+                id integer primary key autoincrement,
+                date text not null,
+                time text not null,
+                course_name text not null,
+                quiz_no int not null,
+                course_no text,
+                syllabus text not null,
+                note text
+            )
+            """
+        )
+init_db()
 
 def load_routine()->dict:
     with open(routine_path,'r')as f:
@@ -19,7 +38,6 @@ def get_class_start_time(time:str)->str:
 
 routine = load_routine()
 
-    
 # routine tools
 @mcp.tool
 def get_current_datetime()->dict:
@@ -105,11 +123,22 @@ def get_next_class_of_today()->dict:
     }
 
 
-# exam tools
+# quiz tools
 @mcp.tool
-def add_exam():
-    pass
+def add_quiz_exam(date:str, time:str, course_name:str,quiz_no:int,syllabus:str, course_no:str="", note:str="")->dict:
+    """Add new quiz exam entry with Date, Time , course Name, Quiz_no and syllabus"""
+    with sqlite3.connect(DB_path) as c:
+        cur = c.execute(
+            "insert into quizes(date,time,course_name,quiz_no,syllabus,course_no,note) values(?,?,?,?,?,?,?)",
+            (date,time,course_name,quiz_no,syllabus,course_no,note)
+        )
+        return{
+            "success": True,
+            "message": "Quiz inserted successfully!",
+            "id":cur.lastrowid
+        }
 
 
-#if __name__ == "__main__":
- #   mcp.run()
+
+if __name__ == "__main__":
+    mcp.run()
