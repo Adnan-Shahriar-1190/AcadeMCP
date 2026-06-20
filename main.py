@@ -1,25 +1,28 @@
 from fastmcp import FastMCP
-import math
+import os
 import json
 from datetime import datetime
+
+routine_path = os.path.join(os.path.dirname(__file__),"resources","aust_routine.json")
+DB_path = os.path.join(os.path.dirname(__file__),"acadeDB.db")
 
 mcp = FastMCP(name='academcp')
 
 def load_routine()->dict:
-    with open('resources/aust_routine.json','r')as f:
+    with open(routine_path,'r')as f:
         routine = json.load(f)
         return routine
     
 def get_class_start_time(time:str)->str:
-    start_time = time.strip('-')[0].strip()
+    start_time = time.split('-')[0].strip()
     return start_time
-        
+
 routine = load_routine()
+
     
 # routine tools
-
 @mcp.tool
-def get_current_datetime():
+def get_current_datetime()->dict:
     """Get current date, time, and day."""
 
     now = datetime.now()
@@ -30,11 +33,12 @@ def get_current_datetime():
     }
 
 @mcp.tool
-def get_anyday_classes(day:str) ->str:
+def get_anyday_classes(day:str) ->dict:
     """
     Get all classes of a given day. Example: MONDAY, TUESDAY,WEDNESDAY.
     """
     day = day.upper().strip()
+    #print(routine['schedule'])
 
     if day not in routine['schedule']:
         return {
@@ -51,7 +55,7 @@ def get_anyday_classes(day:str) ->str:
     }
 
 @mcp.tool
-def get_today_all_classes()->str:
+def get_today_all_classes()->dict:
     """
     Get Today's class based on current day
     """
@@ -60,9 +64,8 @@ def get_today_all_classes()->str:
     
     return get_anyday_classes(today)
     
-
 @mcp.tool
-def get_next_class_of_today():
+def get_next_class_of_today()->dict:
     """
     Get the next class of the day based on current day and time.
     """
@@ -78,14 +81,14 @@ def get_next_class_of_today():
     
     classes = routine['schedule'][current_day]
     
-    next_class=None
+    next_class=[]
     for cls in classes:
         start_time = get_class_start_time(cls['time'])
+        print(start_time)
         if start_time > current_time[:5]:
-            next_class = cls
-            break
+            next_class.append(cls)
     
-    if next_class is None:
+    if not next_class:
         return {
         "success": True,
         "has_next_class": False,
@@ -93,28 +96,20 @@ def get_next_class_of_today():
         "message": "No more classes Today"
         
         }
-    
-    
+        
     return {
     "success": True,
     "has_next_class": True,
     "next_class": next_class,
     "message": "Next class found."
     }
-            
 
+
+# exam tools
 @mcp.tool
-def get_course_info():
+def add_exam():
     pass
 
-@mcp.tool
-def put_exam_day_and_time():
-    pass
-
-
-@mcp.tool
-def add_apples(num1:int,num2:int)->int:
-    return (math.pow(num1,2) + num2)
 
 #if __name__ == "__main__":
  #   mcp.run()

@@ -16,6 +16,7 @@
                 "type": "Theory class",
                 "credits": 3.0,
                 "course": "CSE 4227",
+                "course_name": "Digital Image Processing",
                 "room": "7A03",
                 "teacher": "Dr. Kalpoma"
             },
@@ -24,33 +25,36 @@
                 "type": "Theory class",
                 "credits": 3.0,
                 "course": "CSE 4203",
+                "course_name": "Computer Graphics",
                 "room": "7C07",
                 "teacher": "RZC"
             },
             {
-                "time": "01:00-03:30",
+                "time": "13:00-15:30",
                 "type": "week_alternating_lab",
                 "credits": 0.75,
                 "course": "CSE 4262",
-                "title": "Data Analytics Lab",
+                "course_name": "Data Analytics Lab",
                 "group": "DAgr-2",
                 "room": "7B08",
                 "teacher": "Munia",
                 "note": "Only on alternate weeks (Group-2 schedule)"
             },
             {
-                "time": "03:30-04:20",
+                "time": "15:30-16:20",
                 "type": "Theory class",
                 "credits": 3.0,
                 "course": "CSE 4261 (DA)",
+                "course_name": "Data Analysis",
                 "room": "7C06",
                 "teacher": "Munia"
             },
             {
-                "time": "04:20-05:10",
+                "time": "16:20-17:10",
                 "type": "Theory class",
                 "credits": 3.0,
                 "course": "CSE 4261 (DA)",
+                "course_name": "Data Analysis",
                 "room": "7C06",
                 "teacher": "Munia"
             }
@@ -61,6 +65,7 @@
                 "type": "Theory class",
                 "credits": 3.0,
                 "course": "CSE 4267",
+                "course_name": "Cloud Computing",
                 "room": "7A03",
                 "teacher": "TFQ"
             },
@@ -69,6 +74,7 @@
                 "type": "Theory class",
                 "credits": 3.0,
                 "course": "CSE 4267",
+                "course_name": "Cloud Computing",
                 "room": "7A03",
                 "teacher": "TFQ"
             },
@@ -77,25 +83,26 @@
                 "type": "Theory class",
                 "credits": 3.0,
                 "course": "CSE 4227",
+                "course_name": "Digital Image Processing",
                 "room": "7A03",
                 "teacher": "Dr. Kalpoma"
             },
             {
-                "time": "10:30-01:00",
+                "time": "10:30-13:00",
                 "type": "week_alternating_lab",
                 "credits": 0.75,
                 "note": "Section A2 - assigned lab (CSE 4204 or CSE 4228)",
                 "possible_courses": [
                     {
                         "course": "CSE 4204",
-                        "title": "Computer Graphics Lab",
+                        "course_name": "Computer Graphics Lab",
                         "section": "A2",
                         "room": "7B06",
                         "teacher": "RZC, Era"
                     },
                     {
                         "course": "CSE 4228",
-                        "title": "Digital Image Processing Lab",
+                        "course_name": "Digital Image Processing Lab",
                         "section": "A2",
                         "room": "7B05",
                         "teacher": "Joy, Muthaki"
@@ -109,6 +116,7 @@
                 "type": "Theory class",
                 "credits": 3.0,
                 "course": "CSE 4267",
+                "course_name": "Cloud Computing",
                 "room": "7A05",
                 "teacher": "TFQ"
             },
@@ -117,6 +125,7 @@
                 "type": "Theory class",
                 "credits": 3.0,
                 "course": "CSE 4227",
+                "course_name": "Digital Image Processing",
                 "room": "7A05",
                 "teacher": "Dr. Kalpoma"
             },
@@ -125,6 +134,7 @@
                 "type": "Theory class",
                 "credits": 3.0,
                 "course": "CSE 4203",
+                "course_name": "Computer Graphics",
                 "room": "7A07",
                 "teacher": "RZC"
             },
@@ -133,14 +143,16 @@
                 "type": "Theory class",
                 "credits": 3.0,
                 "course": "CSE 4261 (DA)",
+                "course_name": "Data Analysis",
                 "room": "7A06",
                 "teacher": "Munia"
             },
             {
-                "time": "12:10-01:00",
+                "time": "12:10-13:00",
                 "type": "Theory class",
                 "credits": 3.0,
                 "course": "CSE 4203",
+                "course_name": "Computer Graphics",
                 "room": "7C06",
                 "teacher": "RZC"
             }
