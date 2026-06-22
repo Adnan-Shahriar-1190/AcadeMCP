@@ -3,9 +3,11 @@ import os
 import json
 from datetime import datetime
 import sqlite3
+from google_services import get_classroom_service
 
 routine_path = os.path.join(os.path.dirname(__file__),"resources","aust_routine.json")
 DB_path = os.path.join(os.path.dirname(__file__),"acadedb.db")
+course_path = os.path.join(os.path.dirname(__file__),"resources","courses.json")
 
 mcp = FastMCP(name='academcp')
 
@@ -25,21 +27,27 @@ def init_db():
             )
             """
         )
-init_db()
 
 def load_routine()->dict:
     with open(routine_path,'r')as f:
         routine = json.load(f)
         return routine
     
+def load_courses() -> dict:
+    with open(course_path,'r')as f:
+        courses = json.load(f)
+        return courses
+
 def get_class_start_time(time:str)->str:
     start_time = time.split('-')[0].strip()
     return start_time
 
+init_db()
 routine = load_routine()
+courses = load_courses()
 
 # routine tools
-@mcp.tool
+@mcp.tool()
 def get_current_datetime()->dict:
     """Get current date, time, and day."""
 
@@ -50,7 +58,7 @@ def get_current_datetime()->dict:
         "day": now.strftime("%A")
     }
 
-@mcp.tool
+@mcp.tool()
 def get_anyday_classes(day:str) ->dict:
     """
     Get all classes of a given day. Example: MONDAY, TUESDAY,WEDNESDAY.
@@ -72,7 +80,7 @@ def get_anyday_classes(day:str) ->dict:
         "classes": classes
     }
 
-@mcp.tool
+@mcp.tool()
 def get_today_all_classes()->dict:
     """
     Get Today's class based on current day
@@ -122,9 +130,8 @@ def get_next_class_of_today()->dict:
     "message": "Next class found."
     }
 
-
 # quiz tools
-@mcp.tool
+@mcp.tool()
 def add_quiz_exam(date:str, time:str, course_name:str,quiz_no:int,syllabus:str, course_no:str="", note:str="")->dict:
     """Add new quiz exam entry with Date, Time , course Name, Quiz_no and syllabus"""
     with sqlite3.connect(DB_path) as c:
@@ -138,7 +145,117 @@ def add_quiz_exam(date:str, time:str, course_name:str,quiz_no:int,syllabus:str, 
             "id":cur.lastrowid
         }
 
+# classroom tools
 
+@mcp.tool()
+def all_course_details() ->dict:
+    """Provide the list of all the active courses. courseName,courseId."""
+    return {
+        "success":True,
+        "message":"Courses Retrived successfully.",
+        "courses" : courses
+    }
+
+
+@mcp.tool()
+def get_course_announcements(course_id: str) -> dict:
+    """Get announcements for a specific course."""
+    try:
+        service = get_classroom_service()
+
+        results = (
+            service.courses().announcements().list(courseId=course_id,pageSize=3).execute()
+        )
+
+        announcements = results.get("announcements", [])
+
+        return {
+            "success": True,
+            "count": len(announcements),
+            "announcements": [
+                {
+                    "id": a["id"],
+                    "text": a.get("text", ""),
+                    "created": a.get("creationTime", ""),
+                    "updated": a.get("updateTime", ""),
+                }
+                for a in announcements
+            ]
+        }
+
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e)
+        }
+
+
+@mcp.tool()
+def get_course_assignements(course_id:str)->dict:
+    """Get assignments for a specific course."""
+    try:
+        service = get_classroom_service()
+        results = (
+            service.courses().courseWork().list(courseId=course_id,pageSize=3).execute()
+        )
+        assignments = results.get("courseWork", [])
+        return {
+            "success": True,
+            "count": len(assignments),
+            "assignments": [
+                {
+                    "id": a["id"],
+                    "title": a.get("text", ""),
+                    "description": a.get("description", ""),
+                    "work_type": a.get("workType", ""),
+                    "created": a.get("creationTime", ""),
+                    "updated": a.get("updateTime", ""),
+                    "due_date": a.get("dueDate")
+                }
+                for a in assignments
+            ]
+        }
+        
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e)
+        }
+
+
+@mcp.tool()
+def get_course_materials(course_id:str)->dict:
+    """Get course materials for a specific course."""
+    try:
+        service = get_classroom_service()
+        results = (
+            service.courses().courseWorkMaterials().list(courseId=course_id).execute()
+        )
+        materials = results.get("courseWorkMaterial", [])
+        return {
+            "success": True,
+            "count": len(materials),
+            "materials": [
+                {
+                    "id": m["id"],
+                    "title": m.get("text", ""),
+                    "description": m.get("description", ""),
+                    "created": m.get("creationTime", ""),
+                    "updated": m.get("updateTime", ""),
+                    "materials": m.get("materials",[])
+                }
+                for m in materials
+            ]
+        }
+        
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e)
+        }
+
+#x = get_course_announcements("821632529636")
+#print(x)
 
 if __name__ == "__main__":
     mcp.run()

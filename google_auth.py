@@ -4,15 +4,22 @@ from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 
-SCOPES = ["https://www.googleapis.com/auth/classroom.courses.readonly"]
+CREDENTIALS_FILE  = os.path.join(os.path.dirname(__file__),"credentials.json")
+TOKEN_FILE = os.path.join(os.path.dirname(__file__),"token.json")
 
-creds = None
 
+SCOPES = [
+    "https://www.googleapis.com/auth/classroom.courses.readonly",
+    "https://www.googleapis.com/auth/classroom.announcements.readonly",
+    "https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly",
+    "https://www.googleapis.com/auth/classroom.student-submissions.me.readonly",
+]
 
 def get_credentials():
+    creds = None
     # Load saved login session
-    if os.path.exists("token.json"):
-        creds = Credentials.from_authorized_user_file("token.json", SCOPES)
+    if os.path.exists(TOKEN_FILE):
+        creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
 
     # If not valid,login again
     if not creds or not creds.valid:
@@ -20,15 +27,12 @@ def get_credentials():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                "credentials.json",
+                CREDENTIALS_FILE,
                 SCOPES
             )
             creds = flow.run_local_server(port=8080)
 
         # save session token
-        with open("token.json", "w") as token:
+        with open(TOKEN_FILE, "w") as token:
             token.write(creds.to_json())
-            
     return creds
-
-
