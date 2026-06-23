@@ -7,7 +7,9 @@ def get_classroom_service():
     creds = get_credentials()
     return build("classroom", "v1", credentials=creds)
 
-
+def get_drive_service():
+    creds = get_credentials()
+    return build("drive", "v3", credentials=creds)
 
 '''
 client = get_classroom_service()
