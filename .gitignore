@@ -21,7 +21,6 @@ routine.json
 
 # Secrets and config
 .env
-config.py
 credentials.json
 token.json
 
