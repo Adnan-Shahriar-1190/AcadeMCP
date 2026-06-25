@@ -4,8 +4,8 @@ from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 
-CREDENTIALS_FILE  = os.path.join(os.path.dirname(__file__),"credentials.json")
-TOKEN_FILE = os.path.join(os.path.dirname(__file__),"token.json")
+CREDENTIALS_FILE  = os.path.join(os.path.dirname(__file__),"..","credentials.json")
+TOKEN_FILE = os.path.join(os.path.dirname(__file__),"..","token.json")
 
 
 SCOPES = [
