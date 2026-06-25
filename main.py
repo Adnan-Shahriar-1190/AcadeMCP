@@ -1,3 +1,4 @@
+import os
 from fastmcp import FastMCP
 from shared.db import init_db
 from tools import classroom_tools,routine_tools,quiz_tools
@@ -14,4 +15,6 @@ classroom_tools.register(mcp)
 
 
 if __name__ == "__main__":
-    mcp.run()
+    #mcp.run()
+    port = int(os.environ.get("PORT",8000))
+    mcp.run(transport="streamable-http",host="0.0.0.0", port=port)
