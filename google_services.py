@@ -11,7 +11,6 @@ def get_drive_service():
     creds = get_credentials()
     return build("drive", "v3", credentials=creds)
 
-'''
 client = get_classroom_service()
 results = client.courses().list().execute()
 results = results['courses']
@@ -37,4 +36,3 @@ with open(output_path, 'w') as f:
     json.dump({"courses": courses_data}, f, indent=4)
 
 print(f"Saved {len(courses_data)} active courses to courses.json")
-'''
