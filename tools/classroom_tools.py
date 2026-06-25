@@ -1,5 +1,5 @@
 from shared.config import courses
-from google_services import get_classroom_service
+from google.google_services import get_classroom_service
 
 def register(mcp):
 
