@@ -1,12 +1,11 @@
 import os
 from fastmcp import FastMCP
-from shared.db import init_db
+from database.init_db import init_db
 from tools import classroom_tools,routine_tools,quiz_tools
 
 
-mcp = FastMCP(name='academcp')
-
 init_db()
+mcp = FastMCP(name='academcp')
 
 # all tools
 routine_tools.register(mcp)
