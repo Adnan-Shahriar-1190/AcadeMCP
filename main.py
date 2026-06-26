@@ -7,10 +7,10 @@ from tools import classroom_tools, routine_tools, quiz_tools
 
 @asynccontextmanager
 async def lifespan(mcp):
-    pool.open()
+    await pool.open()
     init_db()
     yield
-    pool.close()
+    await pool.close()
     
 mcp = FastMCP(name='academcp',lifespan=lifespan)
 
