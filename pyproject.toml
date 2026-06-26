@@ -10,4 +10,6 @@ dependencies = [
     "google-auth>=2.0.0",
     "google-auth-oauthlib>=1.0.0",
     "google-auth-httplib2>=0.2.0",
+    "psycopg[binary,pool]>=3.3.4",
+    "python-dotenv>=1.2.2",
 ]
