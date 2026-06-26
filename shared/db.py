@@ -9,5 +9,5 @@ pool = ConnectionPool(
     conninfo=DATABASE_URL,
     min_size=1,
     max_size=3,
-    open=True
+    open=False
 )
