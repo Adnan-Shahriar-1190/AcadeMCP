@@ -4,7 +4,7 @@ from database.init_db import init_db
 from tools import classroom_tools,routine_tools,quiz_tools
 
 
-init_db()
+#init_db()
 mcp = FastMCP(name='academcp')
 
 # all tools
