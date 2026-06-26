@@ -1,9 +1,8 @@
 from shared.db import pool
 
-def init_db():
-    with pool.connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute("""
+async def init_db():
+    async with pool.connection() as conn:
+            await conn.execute("""
                 create table if not exists quizes(
                     id serial primary key,
                     date date not null,
@@ -16,5 +15,3 @@ def init_db():
                     note varchar(100)
                 );    
             """)
-            
-        conn.commit()

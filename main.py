@@ -6,9 +6,9 @@ from database.init_db import init_db
 from tools import classroom_tools, routine_tools, quiz_tools
 
 @asynccontextmanager
-async def lifespan(mcp):
+async def lifespan(server):
     await pool.open()
-    init_db()
+    await init_db()
     yield
     await pool.close()
     
