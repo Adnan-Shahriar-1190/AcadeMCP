@@ -56,7 +56,7 @@ def register(mcp):
             }
             
     @mcp.tool()
-    async def get_courses_by_name(course_name:str)->dict:
+    async def get_quizes_by_course_name(course_name:str)->dict:
         """Show the quizes in the db of a specific course name."""
         try:
             quizes = await quizes_by_course_name_from_db(course_name)
