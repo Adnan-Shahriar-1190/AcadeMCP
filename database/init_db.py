@@ -15,3 +15,4 @@ async def init_db():
                     note varchar(100)
                 );    
             """)
+            

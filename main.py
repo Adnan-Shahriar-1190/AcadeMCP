@@ -7,9 +7,16 @@ from tools import classroom_tools, routine_tools, quiz_tools
 
 @asynccontextmanager
 async def lifespan(server):
+    print("1 >>> Opening pool")
     await pool.open()
+    
+    print("2 >>> initializing db")
     await init_db()
+    
+    print("3 >>> startup complete")
     yield
+    
+    print("4 >>> closing pool")
     await pool.close()
     
 mcp = FastMCP(name='academcp',lifespan=lifespan)
