@@ -4,22 +4,22 @@ from fastmcp import FastMCP
 from shared.db import pool
 from database.init_db import init_db
 from tools import classroom_tools, routine_tools, quiz_tools
+from fastmcp.server.auth.providers.google import GoogleProvider
 
 @asynccontextmanager
 async def lifespan(server):
-    print("1 >>> Opening pool")
     await pool.open()
-    
-    print("2 >>> initializing db")
     await init_db()
-    
-    print("3 >>> startup complete")
     yield
-    
-    print("4 >>> closing pool")
     await pool.close()
     
-mcp = FastMCP(name='academcp',lifespan=lifespan)
+auth = GoogleProvider(
+    client_id=os.environ["GOOGLE_CLIENT_ID"],
+    client_secret=os.environ["GOOGLE_CLIENT_SECRET"],
+    base_url="https://helixion.fastmcp.app",
+)
+    
+mcp = FastMCP(name='academcp',lifespan=lifespan,auth=auth)
 
 # all tools
 routine_tools.register(mcp)
