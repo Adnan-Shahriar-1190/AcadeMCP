@@ -20,7 +20,8 @@ async def add_quiz_to_db(
                 (date, course_name, course_no,quiz_no, syllabus, time,room_no, note),   
             )
             
-            quiz_id = cur.fetchone()[0]
+            row = await cur.fetchone()
+            quiz_id = row[0]
         await conn.commit()
         
     return quiz_id
