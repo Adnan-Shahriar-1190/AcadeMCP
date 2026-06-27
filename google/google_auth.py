@@ -28,7 +28,7 @@ def get_credentials():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
+            flow = InstalledAppFlow.from_client_config(
                 GOOGLE_CREDENTIALS,
                 SCOPES
             )
