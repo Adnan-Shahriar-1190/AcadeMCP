@@ -1,6 +1,6 @@
 from shared.db import pool
 
-async def add_quiz(
+async def add_quiz_to_db(
     date:str,
     course_name:str,
     course_no:str,
@@ -26,7 +26,7 @@ async def add_quiz(
     return quiz_id
 
 
-async def get_all_quizes():
+async def get_all_quizes_from_db():
     async with pool.connection() as conn:
         async with conn.cursor() as cur:
             await cur.execute("""
@@ -38,7 +38,7 @@ async def get_all_quizes():
 
     return quizes
 
-async def get_upcoming_quizzes():
+async def get_upcoming_quizzes_from_db():
     async with pool.connection() as conn:
         async with conn.cursor() as cur:
             await cur.execute(
@@ -51,7 +51,7 @@ async def get_upcoming_quizzes():
             quizzes = await cur.fetchall()
     return quizzes
 
-async def get_quizzes_by_course_name(course_name: str):
+async def quizes_by_course_name_from_db(course_name: str):
     async with pool.connection() as conn:
         async with conn.cursor() as cur:
             await cur.execute(
