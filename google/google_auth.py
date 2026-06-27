@@ -1,12 +1,14 @@
-import os
+import os, json
+from dotenv import load_dotenv
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 
-CREDENTIALS_FILE  = os.path.join(os.path.dirname(__file__),"..","credentials.json")
+load_dotenv()
+#CREDENTIALS_FILE  = os.path.join(os.path.dirname(__file__),"..","credentials.json")
 TOKEN_FILE = os.path.join(os.path.dirname(__file__),"..","token.json")
-
+GOOGLE_CREDENTIALS = json.loads(os.environ["GOOGLE_CREDENTIALS"])
 
 SCOPES = [
     "https://www.googleapis.com/auth/classroom.courses.readonly",
@@ -27,7 +29,7 @@ def get_credentials():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                CREDENTIALS_FILE,
+                GOOGLE_CREDENTIALS,
                 SCOPES
             )
             creds = flow.run_local_server(port=8080)
@@ -36,3 +38,5 @@ def get_credentials():
         with open(TOKEN_FILE, "w") as token:
             token.write(creds.to_json())
     return creds
+
+print(GOOGLE_CREDENTIALS)
