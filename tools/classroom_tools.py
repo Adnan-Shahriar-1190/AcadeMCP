@@ -14,10 +14,10 @@ def register(mcp):
         }
 
     @mcp.tool()
-    def get_course_announcements(course_id: str) -> dict:
+    async def get_course_announcements(course_id: str) -> dict:
         """Get announcements for a specific course."""
         try:
-            service = get_classroom_service()
+            service = await get_classroom_service()
 
             results = (
                 service.courses().announcements().list(courseId=course_id,pageSize=3).execute()
@@ -46,10 +46,10 @@ def register(mcp):
             }
 
     @mcp.tool()
-    def get_course_assignements(course_id:str)->dict:
+    async def get_course_assignements(course_id:str)->dict:
         """Get assignments for a specific course."""
         try:
-            service = get_classroom_service()
+            service = await get_classroom_service()
             results = (
                 service.courses().courseWork().list(courseId=course_id,pageSize=3).execute()
             )
@@ -78,10 +78,10 @@ def register(mcp):
             }
 
     @mcp.tool()
-    def get_course_materials(course_id:str)->dict:
+    async def get_course_materials(course_id:str)->dict:
         """Get course materials for a specific course."""
         try:
-            service = get_classroom_service()
+            service = await get_classroom_service()
             results = (
                 service.courses().courseWorkMaterials().list(courseId=course_id).execute()
             )
