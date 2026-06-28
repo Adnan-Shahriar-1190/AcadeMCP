@@ -27,7 +27,9 @@ async def save_token_to_db(token_data: dict):
             if existing:
                 await cur.execute(
                     """
-                    UPDATE google_tokens SET token=%s, updated_at=NOW() WHERE id=%s
+                    UPDATE google_tokens 
+                    SET token=%s 
+                    WHERE id=%s
                     """,
                     (json.dumps(token_data), existing[0])
                 )
