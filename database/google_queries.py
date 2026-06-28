@@ -1,21 +1,41 @@
 from shared.db import pool
 import json
 
-async def load_token_from_db() -> dict | None:
+from shared.db import pool
+
+async def load_token_from_db():
     async with pool.connection() as conn:
-        row = await conn.fetchrow("SELECT token FROM google_tokens LIMIT 1")
-        return row["token"] if row else None
+        async with conn.cursor() as cur:
+            await cur.execute(
+                """SELECT token FROM google_tokens LIMIT 1"""
+            )
+            row = await cur.fetchone()
+            
+            if row is None:
+                return None
+
+            return row[0]
 
 async def save_token_to_db(token_data: dict):
     async with pool.connection() as conn:
-        existing = await conn.fetchrow("SELECT id FROM google_tokens LIMIT 1")
-        if existing:
-            await conn.execute(
-                "UPDATE google_tokens SET token = $1, updated_at = NOW() WHERE id = $2",
-                json.dumps(token_data), existing["id"]
+        async with conn.cursor() as cur:
+            await cur.execute(
+                """SELECT id FROM google_tokens LIMIT 1"""
             )
-        else:
-            await conn.execute(
-                "INSERT INTO google_tokens (token) VALUES ($1)",
-                json.dumps(token_data)
-            )
+            existing = await cur.fetchone()
+
+            if existing:
+                await cur.execute(
+                    """
+                    UPDATE google_tokens SET token=%s, updated_at=NOW() WHERE id=%s
+                    """,
+                    (json.dumps(token_data), existing[0])
+                )
+            else:
+                await cur.execute(
+                    """
+                    INSERT INTO google_tokens(token)
+                    VALUES(%s)
+                    """,
+                    (json.dumps(token_data),)
+                )
