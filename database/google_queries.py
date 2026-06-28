@@ -2,8 +2,9 @@ from shared.db import pool
 import json
 
 async def load_token_from_db() -> dict | None:
-    row = await pool.fetchrow("SELECT token FROM google_tokens LIMIT 1")
-    return row["token"] if row else None
+    async with pool.connection() as conn:
+        row = await conn.fetchrow("SELECT token FROM google_tokens LIMIT 1")
+        return row["token"] if row else None
 
 async def save_token_to_db(token_data: dict):
     async with pool.connection() as conn:
