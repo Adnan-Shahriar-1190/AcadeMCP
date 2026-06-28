@@ -13,6 +13,13 @@ async def init_db():
                     quiz_no integer not null,
                     syllabus varchar(200) not null,
                     note varchar(100)
-                );    
+                ); 
+            """)
+            
+            await conn.execute("""
+                create table if not exists google_tokens (
+                    id serial primary key,
+                    token JSONB not null
+                );
             """)
             

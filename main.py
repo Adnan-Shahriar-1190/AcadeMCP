@@ -12,17 +12,7 @@ async def lifespan(server):
     await init_db()
     yield
     await pool.close()
-'''   
-auth = GoogleProvider(
-    client_id=os.environ["GOOGLE_CLIENT_ID"],
-    client_secret=os.environ["GOOGLE_CLIENT_SECRET"],
-    base_url="https://helixion.fastmcp.app",
-    required_scopes=[
-        "openid",
-        "https://www.googleapis.com/auth/userinfo.email",
-    ],
-)
-''' 
+
 mcp = FastMCP(name='academcp',lifespan=lifespan)
 
 # all tools

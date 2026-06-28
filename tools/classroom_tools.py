@@ -1,5 +1,6 @@
 from shared.config import courses
 from google.google_services import get_classroom_service
+from google.oauth import create_flow
 
 def register(mcp):
 
@@ -106,3 +107,18 @@ def register(mcp):
                 "success": False,
                 "error": str(e)
             }
+
+    @mcp.tool
+    def connect_google():
+
+        flow = create_flow()
+
+        auth_url, state = flow.authorization_url(
+            access_type="offline",
+            prompt="consent"
+        )
+
+        return {
+            "url": auth_url,
+            "state": state
+        }
