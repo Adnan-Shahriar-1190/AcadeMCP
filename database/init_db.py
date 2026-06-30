@@ -8,8 +8,8 @@ async def init_db():
                     date date not null,
                     time Time,
                     course_name varchar(40) not null,
-                    course_no varchar(10) not null,
-                    room_no varchar(10),
+                    course_no varchar(30) not null,
+                    room_no varchar(30),
                     quiz_no integer not null,
                     syllabus varchar(200) not null,
                     note varchar(100)
@@ -28,7 +28,7 @@ async def init_db():
                 create table if not exists absences(
                     id serial primary key,
                     date date not null,
-                    course_no varchar(10) not null,
+                    course_no varchar(30) not null,
                     course_name varchar(30) not null,
                     time Time not null
                 );
