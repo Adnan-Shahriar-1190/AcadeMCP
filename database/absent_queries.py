@@ -1,12 +1,12 @@
 from shared.db import pool
 
-async def insert_absent(date:str,course_no:str,course_name:str):
+async def insert_absent_to_db(date:str,course_no:str,course_name:str):
     async with pool.connection() as conn:
         async with conn.cursor() as cur:
             await cur.execute(
                 """
                 insert into absences (date, course_no, course_name)
-                values ($1, $2, $3) returning id;
+                values (%s, %s, %s) returning id;
                 """,
                 (date,course_no, course_name),   
             )
@@ -16,26 +16,26 @@ async def insert_absent(date:str,course_no:str,course_name:str):
         await conn.commit()
     return absent_id
 
-async def get_absences_by_course(course_name:str):
+async def get_absences_by_course_from_db(course_name:str):
     async with pool.connection() as conn:
         async with conn.cursor() as cur:
             await cur.execute(
                 """
                 select date, course_no, course_name from absences
-                where lower(course_name) = lower($1)
+                where lower(course_name) = lower(%s)
                 ORDER BY date DESC;
                 """,(course_name,)
             )
             absents = await cur.fetchall()
     return absents
 
-async def get_absence_count_by_course(course_name: str):
+async def get_absence_count_by_course_from_db(course_name: str):
     async with pool.connection() as conn:
         async with conn.cursor() as cur:
             await cur.execute(
                 """
                 select count(*) as absent_count from absences
-                where lower(course_name) = lower($1);
+                where lower(course_name) = lower(%s));
                 """,
                 (course_name,),
             )
@@ -43,7 +43,7 @@ async def get_absence_count_by_course(course_name: str):
 
     return row[0] if row else 0
 
-async def get_absence_count_all_courses():
+async def get_absence_count_all_courses_from_db():
     async with pool.connection() as conn:
         async with conn.cursor() as cur:
             await cur.execute(

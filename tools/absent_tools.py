@@ -1,4 +1,4 @@
-from database.absent_queries import insert_absent, get_absences_by_course, get_absence_count_by_course, get_absence_count_all_courses
+from database.absent_queries import insert_absent_to_db, get_absences_by_course_from_db, get_absence_count_by_course_from_db, get_absence_count_all_courses_from_db
 
 
 def register(mcp):
@@ -17,7 +17,7 @@ def register(mcp):
             course_name: Full course name (e.g. "Data Analysis" or "Computer Graphics").
         """
         try:
-            absent_id = await insert_absent(date, course_no, course_name)
+            absent_id = await insert_absent_to_db(date, course_no, course_name)
 
             return {
                 "success": True,
@@ -40,7 +40,7 @@ def register(mcp):
             course_name: Full course name (e.g. "Data Analysis" or "Computer Graphics").
         """
         try:
-            absences = await get_absences_by_course(course_name)
+            absences = await get_absences_by_course_from_db(course_name)
 
             return {
                 "success": True,
@@ -63,7 +63,7 @@ def register(mcp):
             course_name: Full course name (e.g. "Data Analysis" or "Computer Graphics").
         """
         try:
-            count = await get_absence_count_by_course(course_name)
+            count = await get_absence_count_by_course_from_db(course_name)
 
             return {
                 "success": True,
@@ -84,7 +84,7 @@ def register(mcp):
         Use this when the user wants an overview of absences across all courses.
         """
         try:
-            summary = await get_absence_count_all_courses()
+            summary = await get_absence_count_all_courses_from_db()
 
             return {
                 "success": True,
