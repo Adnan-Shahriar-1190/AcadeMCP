@@ -2,15 +2,26 @@
     "courses": [
         {
             "google_classroom_id": "867704017969",
-            "name": "CSE 4261/4262 Data Analytics Lab Fall 2025",
+            "name": "Data Analytics",
+            "google_classroom_name": "CSE 4261/4262 Data Analytics Lab Fall 2025",
             "section": "Group 1, 2, 3",
             "calendarId": "c_classroom7c9dbd6b@group.calendar.google.com",
             "courseState": "ACTIVE",
-            "aliases": ["DA","Data Analytics","da course","da"]
+            "aliases": ["DA","Data Analytics","da course","da theory"]
+        },
+        {
+            "google_classroom_id": "867704017969",
+            "name": "Data Analytics Lab",
+            "google_classroom_name": "CSE 4261/4262 Data Analytics Lab Fall 2025",
+            "section": "Group 1, 2, 3",
+            "calendarId": "c_classroom7c9dbd6b@group.calendar.google.com",
+            "courseState": "ACTIVE",
+            "aliases": ["DA lab","Data Analytics lab","da lab course","da lab"]
         },
         {
             "google_classroom_id": "855116664466",
-            "name": "CSE4227 Fall2025",
+            "name": "Digital Image Processing",
+            "google_classroom_name": "CSE4227 Fall2025",
             "section": "A, B, C",
             "calendarId": "c_classroom2d5aa397@group.calendar.google.com",
             "courseState": "ACTIVE",
@@ -18,7 +29,8 @@
         },
         {
             "google_classroom_id": "868344051119",
-            "name": "CSE 4203 - Fall 2025",
+            "name": "Computer Graphics",
+            "google_classroom_name": "CSE 4203 - Fall 2025",
             "section": "A, B, C",
             "calendarId": "c_classroomd9a5033f@group.calendar.google.com",
             "courseState": "ACTIVE",
@@ -26,7 +38,8 @@
         },
         {
             "google_classroom_id": "798262968400",
-            "name": "Fall 2025 | CSE 4228",
+            "name": "Digital Image Processing Lab",
+            "google_classroom_name": "Fall 2025 | CSE 4228",
             "section": "A1, A2, B1, B2, C1, C2",
             "calendarId": "c_classroom32ad5457@group.calendar.google.com",
             "courseState": "ACTIVE",
@@ -34,7 +47,8 @@
         },
         {
             "google_classroom_id": "868328274008",
-            "name": "Fall 2025 | CSE 4267",
+            "name": "Cloud Computing",
+            "google_classroom_name": "Fall 2025 | CSE 4267",
             "section": "A, B, C",
             "calendarId": "c_classroomff812ca1@group.calendar.google.com",
             "courseState": "ACTIVE",
@@ -42,7 +56,8 @@
         },
         {
             "google_classroom_id": "868410148524",
-            "name": "CSE 4204 FALL 2025",
+            "name": "Computer Graphics Lab",
+            "google_classroom_name": "CSE 4204 FALL 2025",
             "section": "A1, A2, B1, B2, C1, C2",
             "calendarId": "c_classroomf1dcd64c@group.calendar.google.com",
             "courseState": "ACTIVE",
@@ -50,7 +65,8 @@
         },
         {
             "google_classroom_id": "812050596632",
-            "name": "Advising Group (Batch 49)",
+            "name": "Advising Group",
+            "google_classroom_name": "Advising Group (Batch 49)",
             "section": "A",
             "calendarId": "c_classroom680e4769@group.calendar.google.com",
             "courseState": "ACTIVE",

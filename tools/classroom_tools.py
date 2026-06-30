@@ -1,11 +1,16 @@
 from shared.config import courses
 from google.google_services import get_classroom_service
+from google.oauth import create_flow
 
 def register(mcp):
 
     @mcp.tool()
-    def all_course_details() ->dict:
-        """Provide the list of all the active courses. courseName,courseId."""
+    def get_all_course_details() ->dict:
+        """
+        List all active courses with their formal names, course_id, and aliases.
+        Call this first to resolve a user's shorthand (e.g. 'DA', 'image processing')
+        to the correct course name or ID before passing to other tools.
+        """
         return {
             "success":True,
             "message":"Courses Retrived successfully.",
@@ -13,10 +18,10 @@ def register(mcp):
         }
 
     @mcp.tool()
-    def get_course_announcements(course_id: str) -> dict:
+    async def get_course_announcements(course_id: str) -> dict:
         """Get announcements for a specific course."""
         try:
-            service = get_classroom_service()
+            service = await get_classroom_service()
 
             results = (
                 service.courses().announcements().list(courseId=course_id,pageSize=3).execute()
@@ -45,10 +50,10 @@ def register(mcp):
             }
 
     @mcp.tool()
-    def get_course_assignements(course_id:str)->dict:
+    async def get_course_assignements(course_id:str)->dict:
         """Get assignments for a specific course."""
         try:
-            service = get_classroom_service()
+            service = await get_classroom_service()
             results = (
                 service.courses().courseWork().list(courseId=course_id,pageSize=3).execute()
             )
@@ -77,10 +82,10 @@ def register(mcp):
             }
 
     @mcp.tool()
-    def get_course_materials(course_id:str)->dict:
+    async def get_course_materials(course_id:str)->dict:
         """Get course materials for a specific course."""
         try:
-            service = get_classroom_service()
+            service = await get_classroom_service()
             results = (
                 service.courses().courseWorkMaterials().list(courseId=course_id).execute()
             )
