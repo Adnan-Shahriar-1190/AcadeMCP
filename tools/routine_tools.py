@@ -15,6 +15,7 @@ def register(mcp):
 
         now = datetime.now()
         return {
+            "success": True,
             "date": now.strftime("%Y-%m-%d"),
             "time": now.strftime("%H:%M:%S"),
             "day": now.strftime("%A")
@@ -26,8 +27,7 @@ def register(mcp):
         Get all classes of a given day. Example: MONDAY, TUESDAY,WEDNESDAY.
         """
         day = day.upper().strip()
-        #print(routine['schedule'])
-
+        
         if day not in routine['schedule']:
             return {
                 "success":False,
@@ -45,7 +45,7 @@ def register(mcp):
     @mcp.tool()
     def get_today_all_classes()->dict:
         """
-        Get Today's class based on current day
+        Get Today's class based on current date and time.
         """
         current = get_current_datetime()
         today = current["day"].upper()
@@ -55,7 +55,7 @@ def register(mcp):
     @mcp.tool
     def get_next_class_of_today()->dict:
         """
-        Get the next class of the day based on current day and time.
+        Get the next class of today.
         """
         current = get_current_datetime();
         current_day = current["day"]

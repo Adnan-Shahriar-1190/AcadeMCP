@@ -1,9 +1,23 @@
-from database.quiz_queries import add_quiz_to_db,get_all_quizes_from_db,get_upcoming_quizzes_from_db,quizes_by_course_name_from_db
+from database.quiz_queries import add_quiz_to_db, get_all_quizes_from_db, get_upcoming_quizzes_from_db, quizes_by_course_name_from_db
 
 def register(mcp):
+    
     @mcp.tool()
     async def add_quiz_exam(date:str, course_name:str, course_no:str, quiz_no:int, syllabus:str, time: str,room_no:str="", note:str="")->dict:
-        """Add new quiz exam entry."""
+        """ Add a new quiz/exam entry to the academic schedule database.
+        Use this tool when the user wants to schedule or record an upcoming quiz or exam.
+        Before calling this tool, resolve the course name and course number from the user's course list, and infer the exam time from the class routine if not explicitly provided.
+
+        Args:
+            date:        Exam date in YYYY-MM-DD format (e.g. "2026-07-15").
+            course_name: Full course name (e.g. "Data Analysis or Computer graphics").
+            course_no:   Course code/number (e.g. "CSE-4209").
+            quiz_no:     Sequential quiz number for this course (e.g. 1, 2, 3).
+            syllabus:    Topics or chapters covered in this quiz/exam.
+            time:        Exam start time in HH:MM 24h format (e.g. "09:30").
+            room_no:     Room or hall number where the exam is held (optional).
+            note:        Any additional remarks or instructions (optional).
+        """
         try:
             quiz_id = await add_quiz_to_db(date,course_name,course_no,quiz_no,syllabus,time,room_no,note)
             
@@ -39,7 +53,7 @@ def register(mcp):
             
     @mcp.tool()
     async def get_upcoming_quizes()->dict:
-        """Show all upcoming quizes in the database."""
+        """Retrieve all upcoming quizzes/exams from the database."""
         try:
             quizes = await get_upcoming_quizzes_from_db()
             
@@ -56,8 +70,13 @@ def register(mcp):
             }
             
     @mcp.tool()
-    async def get_quizes_by_course_name(course_name:str)->dict:
-        """Show the quizes in the db of a specific course name."""
+    async def get_quizzes_by_course(course_name:str)->dict:
+        """
+        Retrieve all quizzes for a specific course.
+
+        Args:
+            course_name: Full or partial course name ("Data Analysis or Computer graphics").
+        """
         try:
             quizes = await quizes_by_course_name_from_db(course_name)
             
@@ -72,4 +91,3 @@ def register(mcp):
                 "success":False,
                 "message": str(e)
             }
-            

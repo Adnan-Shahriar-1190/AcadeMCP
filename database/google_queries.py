@@ -28,7 +28,7 @@ async def save_token_to_db(token_data: dict):
                 await cur.execute(
                     """
                     UPDATE google_tokens 
-                    SET token=%s 
+                    SET token=%s
                     WHERE id=%s
                     """,
                     (json.dumps(token_data), existing[0])
@@ -41,3 +41,4 @@ async def save_token_to_db(token_data: dict):
                     """,
                     (json.dumps(token_data),)
                 )
+        await conn.commit()

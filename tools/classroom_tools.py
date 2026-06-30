@@ -6,7 +6,11 @@ def register(mcp):
 
     @mcp.tool()
     def all_course_details() ->dict:
-        """Provide the list of all the active courses. courseName,courseId."""
+        """
+        List all active courses with their formal names, course_id, and aliases.
+        Call this first to resolve a user's shorthand (e.g. 'DA', 'image processing')
+        to the correct course name or ID before passing to other tools.
+        """
         return {
             "success":True,
             "message":"Courses Retrived successfully.",
@@ -107,18 +111,3 @@ def register(mcp):
                 "success": False,
                 "error": str(e)
             }
-
-    @mcp.tool
-    def connect_google():
-
-        flow = create_flow()
-
-        auth_url, state = flow.authorization_url(
-            access_type="offline",
-            prompt="consent"
-        )
-
-        return {
-            "url": auth_url,
-            "state": state
-        }

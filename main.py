@@ -4,7 +4,6 @@ from fastmcp import FastMCP
 from shared.db import pool
 from database.init_db import init_db
 from tools import classroom_tools, routine_tools, quiz_tools
-from fastmcp.server.auth.providers.google import GoogleProvider
 
 @asynccontextmanager
 async def lifespan(server):
@@ -22,6 +21,5 @@ classroom_tools.register(mcp)
 
 
 if __name__ == "__main__":
-    #mcp.run()
     port = int(os.environ.get("PORT",8000))
     mcp.run(transport="streamable-http",host="0.0.0.0", port=port)
