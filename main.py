@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastmcp import FastMCP
 from shared.db import pool
 from database.init_db import init_db
-from tools import classroom_tools, routine_tools, quiz_tools
+from tools import classroom_tools, routine_tools, quiz_tools, absent_tools
 
 @asynccontextmanager
 async def lifespan(server):
@@ -18,6 +18,7 @@ mcp = FastMCP(name='academcp',lifespan=lifespan)
 routine_tools.register(mcp)
 quiz_tools.register(mcp)
 classroom_tools.register(mcp)
+absent_tools.register(mcp)
 
 
 if __name__ == "__main__":

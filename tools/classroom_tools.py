@@ -5,7 +5,7 @@ from google.oauth import create_flow
 def register(mcp):
 
     @mcp.tool()
-    def all_course_details() ->dict:
+    def get_all_course_details() ->dict:
         """
         List all active courses with their formal names, course_id, and aliases.
         Call this first to resolve a user's shorthand (e.g. 'DA', 'image processing')
