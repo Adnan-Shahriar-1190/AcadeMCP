@@ -30,7 +30,7 @@ async def init_db():
                     date date not null,
                     course_no varchar(30) not null,
                     course_name varchar(30) not null,
-                    time Time not null
+                    time varchar(30) not null
                 );
             """)
             
