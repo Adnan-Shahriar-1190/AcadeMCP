@@ -1,14 +1,14 @@
 from shared.db import pool
 
-async def insert_absent_to_db(date:str,course_no:str,course_name:str):
+async def insert_absent_to_db(date:str,course_no:str,course_name:str,time:str):
     async with pool.connection() as conn:
         async with conn.cursor() as cur:
             await cur.execute(
                 """
-                insert into absences (date, course_no, course_name)
-                values (%s, %s, %s) returning id;
+                insert into absences (date, course_no, course_name,time)
+                values (%s, %s, %s, %s) returning id;
                 """,
-                (date,course_no, course_name),   
+                (date,course_no, course_name,time),   
             )
             
             row = await cur.fetchone()
