@@ -23,3 +23,13 @@ async def init_db():
                 );
             """)
             
+            await conn.execute(
+                """
+                create table if not exists absences(
+                    id serial primary key,
+                    date date not null,
+                    course_no varchar(10) not null,
+                    course_name varchar(30) not null
+                );
+            """)
+            
