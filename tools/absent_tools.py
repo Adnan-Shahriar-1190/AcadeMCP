@@ -4,7 +4,7 @@ from database.absent_queries import insert_absent_to_db, get_absences_by_course_
 def register(mcp):
 
     @mcp.tool()
-    async def add_absent(date: str, course_no: str, course_name: str) -> dict:
+    async def add_absent(date: str, course_no: str, course_name: str,time:str) -> dict:
         """
         Record a new absence entry in the database.
 
@@ -15,9 +15,10 @@ def register(mcp):
             date:        Date of absence in YYYY-MM-DD format.
             course_no:   Course code/number (e.g. "CSE-4209").
             course_name: Full course name (e.g. "Data Analysis" or "Computer Graphics").
+            time:        Time period of the class (e.g. 10.00-11.00).
         """
         try:
-            absent_id = await insert_absent_to_db(date, course_no, course_name)
+            absent_id = await insert_absent_to_db(date, course_no, course_name,time)
 
             return {
                 "success": True,
