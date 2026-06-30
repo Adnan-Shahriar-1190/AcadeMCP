@@ -1,4 +1,4 @@
-from database.absent_queries import insert_absent_to_db, get_absences_by_course_from_db, get_absence_count_by_course_from_db, get_absence_count_all_courses_from_db
+from database.absent_queries import insert_absent_to_db, get_absences_by_course_from_db, get_absence_count_by_course_from_db, get_absence_count_all_courses_from_db,delete_absent_from_db
 
 
 def register(mcp):
@@ -90,6 +90,34 @@ def register(mcp):
                 "success": True,
                 "message": f"Absence summary for {len(summary)} courses.",
                 "summary": summary,
+            }
+
+        except Exception as e:
+            return {
+                "success": False,
+                "message": str(e)
+            }
+    
+    @mcp.tool()
+    async def delete_absent(absent_id: int) -> dict:
+        """
+        Delete an absence entry by its ID.Use this when the user wants to remove a previously recorded absence.
+        Args:
+            absent_id: The ID of the absence record to delete.
+        """
+        try:
+            deleted_id = await delete_absent_from_db(absent_id)
+
+            if deleted_id is None:
+                return {
+                    "success": False,
+                    "message": f"No absence found with id {absent_id}.",
+                }
+
+            return {
+                "success": True,
+                "message": "Absence deleted successfully!!",
+                "absent_id": deleted_id,
             }
 
         except Exception as e:

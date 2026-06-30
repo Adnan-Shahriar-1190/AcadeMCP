@@ -55,3 +55,16 @@ async def get_absence_count_all_courses_from_db():
                 """
             )
             return await cur.fetchall()
+
+async def delete_absent_from_db(absent_id: int):
+    async with pool.connection() as conn:
+        async with conn.cursor() as cur:
+            await cur.execute(
+                """
+                delete from absences
+                where id = %s returning id;
+                """, (absent_id,),
+            )
+            row = await cur.fetchone()
+        await conn.commit()
+    return row[0] if row else None
